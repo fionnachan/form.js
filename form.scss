@@ -1,0 +1,72 @@
+.form-wrapper {
+  line-height: 1.3em;
+  .form-step-2 {
+    display: none;
+  }
+  .form-row {
+    margin: 5px 0;
+  }
+  .form-button-row {
+    text-align: center;
+  }
+  > .form-row:last-child {
+    text-align: center;
+  }
+  .form-hidden {
+    display: none;
+  }
+  input[type="text"],
+  input[type="date"],
+  input[type="email"],
+  input[type="tel"],
+  select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 4px;
+    border: 1px solid black;
+  }
+  input.input-invalid,
+  select.input-invalid {
+    border: 1px solid red;
+  }
+  .form-row.input-invalid {
+    border: 1px solid red;
+    &.add-Q-select {
+      border: 0;
+      select {
+        border: 1px solid red;
+      }
+    }
+  }
+  .name-row {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 50%;
+  }
+  .name-row ~ .name-row input {
+    border-left: 0;
+  }
+  label {
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		   -moz-user-select: none;
+		    -ms-user-select: none;
+		        user-select: none;
+    cursor: pointer;
+
+    a {
+      text-decoration: underline;
+    }
+  }
+  .form-submit {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid black;
+    transition: all 0.4s;
+
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+  }
+}
