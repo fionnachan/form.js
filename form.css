@@ -1,0 +1,54 @@
+.form-wrapper {
+  line-height: 1.3em; }
+  .form-wrapper .form-step-2 {
+    display: none; }
+  .form-wrapper .form-row {
+    margin: 5px 0; }
+  .form-wrapper .form-button-row {
+    text-align: center; }
+  .form-wrapper > .form-row:last-child {
+    text-align: center; }
+  .form-wrapper .form-hidden {
+    display: none; }
+  .form-wrapper input[type="text"],
+  .form-wrapper input[type="date"],
+  .form-wrapper input[type="email"],
+  .form-wrapper input[type="tel"],
+  .form-wrapper select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 4px;
+    border: 1px solid black; }
+  .form-wrapper input.input-invalid,
+  .form-wrapper select.input-invalid {
+    border: 1px solid red; }
+  .form-wrapper .form-row.input-invalid {
+    border: 1px solid red; }
+    .form-wrapper .form-row.input-invalid.add-Q-select {
+      border: 0; }
+      .form-wrapper .form-row.input-invalid.add-Q-select select {
+        border: 1px solid red; }
+  .form-wrapper .name-row {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 50%; }
+  .form-wrapper .name-row ~ .name-row input {
+    border-left: 0; }
+  .form-wrapper label {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer; }
+    .form-wrapper label a {
+      text-decoration: underline; }
+  .form-wrapper .form-submit {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid black;
+    -webkit-transition: all 0.4s;
+            transition: all 0.4s; }
+    .form-wrapper .form-submit:hover {
+      color: white;
+      background-color: black; }
