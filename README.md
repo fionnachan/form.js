@@ -41,7 +41,7 @@ var x = new fifi_form(form_config);
 
 ###Full Config:
 ```
-_.def = {
+{
     formRendered: false, // provide an option to render the form using your own method, but can still use the validation and submission of this form.js
     wrapper: '.form-wrapper', // target element for appending the form
     submissionEndPoint: '/endpoint', // please change to the submission end point of your form
