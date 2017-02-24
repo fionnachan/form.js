@@ -29,7 +29,7 @@ fifi_form = (function() {
     var result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie);
     return result ? result[1] : null;
   }; // readCookie
-  function ajaxPost(link, data, onSuccess) {
+  function ajaxPost(link, data, onSuccess, _) {
     var request = new XMLHttpRequest();
     request.open('POST', link, true);
     request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
@@ -465,7 +465,7 @@ fifi_form = (function() {
           }
         }
         _.def.customSubmitSuccess();
-      });
+      }, _);
     } else {
       //error
       _.def.customSubmitError();
