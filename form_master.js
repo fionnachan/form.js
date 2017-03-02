@@ -391,17 +391,19 @@ fifi_form = (function() {
           addQ = document.querySelectorAll(_.def.wrapper + ' [class*="add-Question"]');
         }
       }
-      for (var j = 0; j < addQ.length; j++) {
-        comments += '\u3010' + addQ[j].querySelector('.label').textContent + '\u3011';
-        if (addQ[j].querySelectorAll('select').length > 0) {
-          var val = addQ[j].querySelector('select').value == '' ? 'empty answer' : addQ[j].querySelector('select').value;
-          comments += val;
-        } else {
-          for (var k = 1; k < addQ[j].children.length; k++) {
-            if (addQ[j].children[k].querySelector('input').checked) {
-              comments += addQ[j].children[k].querySelector('input').value + ';';
-            }
-          }
+      if (typeof addQ !== "undefined") {
+        for (let j = 0; j < addQ.length; j++) {
+          comments += `【${addQ[j].querySelector('.label').textContent}】`;
+           if (addQ[j].querySelectorAll('select').length > 0) {
+             let val = (addQ[j].querySelector('select').value == '') ? 'empty answer' : addQ[j].querySelector('select').value;
+             comments += val;
+           } else {
+             for (let k = 1; k < addQ[j].children.length; k++) {
+               if (addQ[j].children[k].querySelector('input').checked) {
+                 comments += addQ[j].children[k].querySelector('input').value + ';';
+               }
+             }
+           }
         }
       }
       return comments;
