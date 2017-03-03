@@ -27,7 +27,7 @@ var form_config = {
     phone: 'Phone',
     address: 'Address',
     loc: 'City',
-    next: 'Suivre',
+    next: 'Suivant',
     submit: 'Submit'
   },
   locList: { // text: value
