@@ -182,16 +182,12 @@ fifi_form = (function() {
         '重庆': '50|重庆'
       },
       customSubmitSuccess: function customSubmitSuccess() {
-        document.querySelector('body').style.background = 'white';
       },
       customSubmitError: function customSubmitError() {
-        document.querySelector('body').style.background = '#ffddee';
       },
       onEachValidationSuccess: function onEachValidationSuccess() {
-        //document.querySelector('body').style.background = 'red';
       },
       onEachValidationError: function onEachValidationError() {
-        //document.querySelector('body').style.background = 'red';
       },
       customValidation: {
         first_name: {
@@ -299,6 +295,9 @@ fifi_form = (function() {
           if (_.def.additionalQuestions[g]['isMC'] == false && _.def.additionalQuestions[g]['radio_or_dropdown'] == 'dropdown') {
             appendHTML += '</select>';
           }
+          if (_.def.additionalQuestions[g]['isMC'] == false && _.def.additionalQuestions[g]['radio_or_dropdown'] == false) {
+            appendHTML += '<input type="text"/>';
+          }
           appendHTML += '</div>';
         }
       }
@@ -370,7 +369,7 @@ fifi_form = (function() {
     $(_.def.wrapper).innerHTML = appendHTML;
 
     if (_.def.twoStep && _.def.addressTBC.required == true) {
-      var add_field = $('.form-address-row').cloneNode(true);
+      var add_field = $(_.def.wrapper + ' .form-address-row').cloneNode(true);
       $(_.def.wrapper + ' .form-step-2').appendChild(add_field);
     }
 
@@ -392,18 +391,20 @@ fifi_form = (function() {
         }
       }
       if (typeof addQ !== "undefined") {
-        for (let j = 0; j < addQ.length; j++) {
-          comments += `【${addQ[j].querySelector('.label').textContent}】`;
-           if (addQ[j].querySelectorAll('select').length > 0) {
-             let val = (addQ[j].querySelector('select').value == '') ? 'empty answer' : addQ[j].querySelector('select').value;
-             comments += val;
-           } else {
-             for (let k = 1; k < addQ[j].children.length; k++) {
-               if (addQ[j].children[k].querySelector('input').checked) {
-                 comments += addQ[j].children[k].querySelector('input').value + ';';
-               }
-             }
-           }
+        for (var j = 0; j < addQ.length; j++) {
+          comments += '\u3010' + addQ[j].querySelector('.label').textContent + '\u3011';
+          if (addQ[j].querySelectorAll('select').length > 0) {
+            var val = addQ[j].querySelector('select').value == '' ? 'empty answer' : addQ[j].querySelector('select').value;
+            comments += val;
+          } else if (addQ[j].querySelectorAll('input[type="text"]').length > 0) {
+            comments += addQ[j].querySelectorAll('input[type="text"]')[0].value + ';';
+          } else {
+            for (var k = 1; k < addQ[j].children.length; k++) {
+              if (addQ[j].children[k].querySelector('input').checked) {
+                comments += addQ[j].children[k].querySelector('input').value + ';';
+              }
+            }
+          }
         }
       }
       return comments;
@@ -602,14 +603,14 @@ fifi_form = (function() {
     } // isValidDate
 
     if (_.def.askFullName) {
-      $('.field_first_name').value = 'read last name';
-      $('.field_last_name').value = $('.field_full_name').value;
+      $(_.def.wrapper + ' .field_first_name').value = 'read last name';
+      $(_.def.wrapper + ' .field_last_name').value = $(_.def.wrapper + ' .field_full_name').value;
     }
 
     var exSelector = _.def.twoStep ? '.form-step-' + _.curStep : '';
 
-    var fields = document.querySelectorAll(_.def.wrapper + ' ' + exSelector + ' [class*="field_"]');
-    var requiredAddQ = document.querySelectorAll(_.def.wrapper + ' [class*="add-Q-required"]');
+    var fields = $(_.def.wrapper).querySelectorAll(exSelector + ' [class*="field_"]');
+    var requiredAddQ = $(_.def.wrapper).querySelectorAll('[class*="add-Q-required"]');
 
     for (var k = 0; k < fields.length; k++) {
       var fval = fields[k].value;
@@ -622,18 +623,18 @@ fifi_form = (function() {
 
       if (curReq === true) {
         if (curRegex.test(fval) === true && (curField == "birthdate" && fval >= curMin || fval.length >= curMin) && (curField == "birthdate" && fval <= curMax || fval.length <= curMax) && (curField == "birthdate" && isValidDate(fval) || true)) {
-          onValid($('.field_' + curField));
+          onValid($(_.def.wrapper + ' .field_' + curField));
         } else {
-          onInvalid($('.field_' + curField));
+          onInvalid($(_.def.wrapper + ' .field_' + curField));
         }
       }
     }
 
     if (Object.keys(_.def.locList).length > 2) {
-      if ($('#locList').value != '') {
-        onValid($('#locList'));
+      if ($(_.def.wrapper + ' #locList').value != '') {
+        onValid($(_.def.wrapper + ' #locList'));
       } else {
-        onInvalid($('#locList'));
+        onInvalid($(_.def.wrapper + ' #locList'));
       }
     }
 
@@ -664,11 +665,11 @@ fifi_form = (function() {
     }
 
     // form logic
-    if (!$('#WantsBrochure').checked && !$('#WantsInfo').checked && !$('#AcceptTnC').checked) {
-      onInvalid($('.form-AcceptTnC'));
+    if (!$(_.def.wrapper + ' #WantsBrochure').checked && !$(_.def.wrapper + ' #WantsInfo').checked && !$(_.def.wrapper + ' #AcceptTnC').checked) {
+      onInvalid($(_.def.wrapper + ' .form-AcceptTnC'));
     }
-    if (hasClass($('.form-AcceptTnC'), 'input-invalid') && ($('#WantsBrochure').checked || $('#WantsInfo').checked || $('#AcceptTnC').checked)) {
-      onValid($('.form-AcceptTnC'));
+    if (hasClass($(_.def.wrapper + ' .form-AcceptTnC'), 'input-invalid') && ($(_.def.wrapper + ' #WantsBrochure').checked || $(_.def.wrapper + ' #WantsInfo').checked || $(_.def.wrapper + ' #AcceptTnC').checked)) {
+      onValid($(_.def.wrapper + ' .form-AcceptTnC'));
     }
 
     if (_.invalidNum === 0) {
