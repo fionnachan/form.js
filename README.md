@@ -6,7 +6,7 @@ Render a customized lead form at the client-side.
 - **Vanilla Javascipt.**
 
 
-###[CodePen Demo](http://codepen.io/fionnachan/pen/jBOPBj)
+### [CodePen Demo](http://codepen.io/fionnachan/pen/jBOPBj)
 
 
 ### 1. Include form.css & form_master.js
@@ -39,7 +39,7 @@ var x = new fifi_form(form_config);
 ```
 ### Does not recommend having several forms on the same page because there are some minor bugs causing problems. (Will be fixed soon.)
 
-###Full Config:
+### Full Config:
 ```
 var form_config = {
     formRendered: false, // provide an option to render the form using your own method, but can still use the validation and submission of this form.js
